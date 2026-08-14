@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="ru" data-lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>С днём рождения, Алека</title>
+<meta name="description" content="Персональная поздравительная страница ко дню рождения.">
+<meta name="theme-color" content="#FBF7F2">
+
+<!-- TODO: для красивого превью в Telegram/WhatsApp замени URL на свой адрес GitHub Pages -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="С днём рождения, Алека!">
+<meta property="og:description" content="Страница, собранная из тепла, смеха и наших любимых моментов.">
+<meta property="og:image" content="https://kak0yt0-che1.github.io/alekabd/pics/photo_17_2026-08-14_23-17-27.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Manrope:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤍</text></svg>">
+
+<style>
+/* ==========================================================================
+   1. ТОКЕНЫ ДИЗАЙНА  ·  DESIGN TOKENS
+   Меняешь палитру здесь — меняется вся страница.
+   ========================================================================== */
+:root{
+  /* Фон и текст */
+  --cream:        #FBF7F2;
+  --cream-deep:   #F4EBE3;
+  --surface:      #FFFFFF;
+  --ink:          #2B2724;   /* 12.5:1 на кремовом */
+  --ink-soft:     #5C534D;   /*  7.0:1 */
+  --ink-faint:    #6F645D;   /*  5.4:1 — минимум для мелкого текста */
+  --line:         #E8DDD3;
+
+  /* Акценты. Светлые оттенки — только для заливок и рамок,
+     *-deep — единственные, которыми разрешено красить текст (AA 4.5:1). */
+  --peach:        #DE8B72;
+  --peach-deep:   #A8543C;   /*  4.9:1 */
+  --peach-tint:   #F8DED3;
+  --violet:       #8375AC;
+  --violet-deep:  #6A5B92;   /*  5.6:1 */
+  --violet-tint:  #E2DBF0;
+
+  /* Ритм */
+  --sp-1: .5rem;  --sp-2: 1rem;   --sp-3: 1.5rem;
+  --sp-4: 2.5rem; --sp-5: 4rem;   --sp-6: 6rem;
+  --r-sm: 10px;   --r-md: 18px;   --r-lg: 28px;  --r-pill: 999px;
+
+  --shadow-sm: 0 2px 10px rgba(74,54,42,.05);
+  --shadow-md: 0 10px 30px -12px rgba(74,54,42,.16);
+  --shadow-lg: 0 26px 60px -24px rgba(74,54,42,.28);
+
+  --ease: cubic-bezier(.22,1,.36,1);
+  --maxw: 1120px;
+  --header-h: 62px;
+}
+
+/* ==========================================================================
+   2. БАЗА  ·  BASE
+   ========================================================================== */
+*,*::before,*::after{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:17px;
+  line-height:1.7;
+  font-weight:400;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img,video,canvas{max-width:100%;display:block;}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;}
+a{color:inherit;}
+
+h1,h2,h3{
+  font-family:"Playfair Display",Georgia,serif;
+  font-weight:500;
+  line-height:1.12;
+  letter-spacing:-.01em;
+  margin:0;
+  text-wrap:balance;
+}
+h1{font-size:clamp(2.4rem,8.2vw,4.9rem);}
+h2{font-size:clamp(1.85rem,4.6vw,3rem);}
+h3{font-size:clamp(1.15rem,2.4vw,1.4rem);}
+p{margin:0 0 1.15em;}
+p:last-child{margin-bottom:0;}
+
+:focus-visible{
+  outline:2px solid var(--violet);
+  outline-offset:3px;
+  border-radius:4px;
+}
+
+/* Переключатель языка: скрываем неактивный вариант подписи */
+.lbl{display:none;}
+[data-lang="ru"] .lbl--ru{display:inline;}
+[data-lang="en"] .lbl--en{display:inline;}
+
+/* ==========================================================================
+   3. РАСКЛАДКА  ·  LAYOUT
+   ========================================================================== */
+.wrap{width:min(100% - 2.5rem, var(--maxw));margin-inline:auto;}
+.section{padding-block:clamp(4rem,11vw,7.5rem);position:relative;}
+.section--tint{background:linear-gradient(180deg,transparent,var(--cream-deep) 22%,var(--cream-deep) 78%,transparent);}
+:target,section[id]{scroll-margin-top:calc(var(--header-h) + 12px);}
+
+.eyebrow{
+  font-size:.76rem;
+  font-weight:600;
+  letter-spacing:.19em;
+  text-transform:uppercase;
+  color:var(--peach-deep);
+  margin:0 0 var(--sp-2);
+}
+.section__head{max-width:44ch;margin-bottom:clamp(2.2rem,5vw,3.4rem);}
+.section__lead{color:var(--ink-soft);margin-top:var(--sp-2);font-size:1.05rem;}
+
+/* ==========================================================================
+   4. ШАПКА  ·  HEADER
+   ========================================================================== */
+.progress{position:fixed;inset:0 0 auto 0;height:2px;z-index:60;pointer-events:none;}
+.progress__bar{
+  display:block;height:100%;width:0%;
+  background:linear-gradient(90deg,var(--peach),var(--violet));
+  transition:width .1s linear;
+}
+.site-header{
+  position:sticky;top:0;z-index:50;
+  height:var(--header-h);
+  display:flex;align-items:center;gap:var(--sp-2);
+  padding-inline:clamp(1rem,4vw,2rem);
+  background:rgba(251,247,242,.78);
+  backdrop-filter:blur(14px) saturate(1.4);
+  -webkit-backdrop-filter:blur(14px) saturate(1.4);
+  border-bottom:1px solid transparent;
+  transition:border-color .3s;
+}
+.site-header.is-stuck{border-bottom-color:var(--line);}
+.site-header__mark{
+  font-family:"Playfair Display",serif;font-size:1.15rem;
+  text-decoration:none;letter-spacing:.02em;white-space:nowrap;
+}
+.site-header__mark span{color:var(--peach);}
+.nav{margin-left:auto;display:none;gap:var(--sp-3);}
+.nav a{
+  text-decoration:none;font-size:.86rem;font-weight:500;color:var(--ink-soft);
+  position:relative;padding-block:4px;transition:color .25s;
+}
+.nav a::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:var(--peach);transform:scaleX(0);transform-origin:left;
+  transition:transform .35s var(--ease);
+}
+.nav a:hover{color:var(--ink);}
+.nav a:hover::after{transform:scaleX(1);}
+@media (min-width:860px){ .nav{display:flex;} }
+
+.lang{
+  margin-left:auto;display:flex;align-items:center;
+  border:1px solid var(--line);border-radius:var(--r-pill);
+  padding:3px;background:var(--surface);
+}
+@media (min-width:860px){ .lang{margin-left:var(--sp-3);} }
+.lang__btn{
+  font-size:.72rem;font-weight:700;letter-spacing:.08em;
+  padding:5px 11px;border-radius:var(--r-pill);color:var(--ink-faint);
+  transition:background .3s,color .3s;
+}
+.lang__btn[aria-pressed="true"]{background:var(--ink);color:var(--cream);}
+
+/* ==========================================================================
+   5. КНОПКИ  ·  BUTTONS
+   ========================================================================== */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6em;
+  padding:.85em 1.7em;border-radius:var(--r-pill);
+  font-size:.92rem;font-weight:600;text-decoration:none;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s,color .3s;
+}
+.btn--primary{background:var(--ink);color:var(--cream);box-shadow:var(--shadow-md);}
+.btn--primary:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg);}
+.btn--ghost{border:1px solid var(--line);background:var(--surface);color:var(--ink);}
+.btn--ghost:hover{transform:translateY(-2px);border-color:var(--peach);box-shadow:var(--shadow-md);}
+.btn:active{transform:translateY(0);}
+
+/* ==========================================================================
+   6. ГЕРОЙ  ·  HERO
+   ========================================================================== */
+.hero{
+  position:relative;isolation:isolate;
+  min-height:calc(100svh - var(--header-h));
+  display:grid;place-items:center;
+  padding:var(--sp-5) 0 var(--sp-4);
+  text-align:center;overflow:hidden;
+}
+.hero__bg{position:absolute;inset:-10%;z-index:-1;pointer-events:none;}
+.blob{
+  position:absolute;border-radius:50%;
+  filter:blur(70px);opacity:.55;
+  will-change:transform;
+}
+.blob--1{width:44vmax;height:44vmax;left:-12vmax;top:-8vmax;background:var(--peach-tint);animation:float1 26s ease-in-out infinite;}
+.blob--2{width:38vmax;height:38vmax;right:-10vmax;top:6vmax;background:var(--violet-tint);animation:float2 32s ease-in-out infinite;}
+.blob--3{width:32vmax;height:32vmax;left:34%;bottom:-14vmax;background:#F6E7D6;animation:float1 38s ease-in-out infinite reverse;}
+@keyframes float1{0%,100%{transform:translate3d(0,0,0) scale(1);}50%{transform:translate3d(4vmax,3vmax,0) scale(1.08);}}
+@keyframes float2{0%,100%{transform:translate3d(0,0,0) scale(1);}50%{transform:translate3d(-5vmax,4vmax,0) scale(.94);}}
+
+.petals{position:absolute;inset:0;overflow:hidden;}
+.petal{
+  position:absolute;top:-8%;
+  border-radius:50% 0 50% 50%;
+  background:var(--peach-tint);opacity:.7;
+  animation:fall linear infinite;
+  will-change:transform;
+}
+@keyframes fall{
+  0%{transform:translate3d(0,-10vh,0) rotate(0deg);opacity:0;}
+  10%{opacity:.7;}
+  90%{opacity:.5;}
+  100%{transform:translate3d(var(--drift,20px),108vh,0) rotate(420deg);opacity:0;}
+}
+
+.hero__inner{position:relative;width:min(100% - 2.5rem,760px);margin-inline:auto;}
+.hero__title{margin-block:.18em .38em;}
+.hero__title em{font-style:italic;color:var(--peach);}
+.hero__sub{
+  color:var(--ink-soft);font-size:clamp(1rem,2.4vw,1.18rem);
+  max-width:46ch;margin-inline:auto;
+}
+.hero__cta{margin-top:clamp(2rem,5vw,3rem);display:inline-flex;flex-direction:column;align-items:center;gap:.6rem;text-decoration:none;color:var(--ink-soft);}
+.scroll-cue{
+  width:44px;height:44px;border-radius:50%;
+  border:1px solid var(--line);background:var(--surface);
+  display:grid;place-items:center;
+  transition:transform .3s var(--ease),border-color .3s,box-shadow .3s;
+  animation:bob 2.6s ease-in-out infinite;
+}
+.hero__cta:hover .scroll-cue{border-color:var(--peach);box-shadow:var(--shadow-md);transform:translateY(3px);}
+.hero__cta span{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;}
+@keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+
+/* Анимация заголовка по словам */
+.word{display:inline-block;overflow:hidden;padding-bottom:.14em;margin-bottom:-.14em;}
+.word__in{display:inline-block;transform:translateY(115%);animation:wordUp .95s var(--ease) forwards;}
+@keyframes wordUp{to{transform:translateY(0);}}
+
+/* ==========================================================================
+   7. О ТЕБЕ  ·  ABOUT
+   ========================================================================== */
+.about{display:grid;gap:clamp(2rem,5vw,3.5rem);align-items:start;}
+@media (min-width:880px){ .about{grid-template-columns:1fr .82fr;gap:clamp(3rem,6vw,5rem);} }
+.about__body{margin-top:1.8rem;}
+.about__body p{color:var(--ink-soft);}
+.about__body p:first-child{
+  font-size:1.16rem;color:var(--ink);
+  font-family:"Playfair Display",serif;font-style:italic;line-height:1.55;
+}
+
+.namecard{
+  position:relative;padding:clamp(2rem,5vw,2.8rem);
+  background:var(--surface);border-radius:var(--r-lg);
+  box-shadow:var(--shadow-md);text-align:center;
+}
+.namecard::before{
+  content:"";position:absolute;inset:10px;border-radius:calc(var(--r-lg) - 8px);
+  border:1px solid var(--peach-tint);
+  clip-path:inset(0 0 0 0);
+  animation:frame 7s var(--ease) infinite;
+  pointer-events:none;
+}
+@keyframes frame{
+  0%,100%{opacity:.55;transform:scale(1);}
+  50%{opacity:1;transform:scale(.985);}
+}
+.namecard__label{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);}
+.namecard__name{
+  font-family:"Playfair Display",serif;font-size:clamp(2.6rem,7vw,3.6rem);
+  line-height:1;margin:.34em 0 .2em;
+  background:linear-gradient(100deg,var(--peach-deep),var(--violet-deep));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.namecard__note{font-family:"Caveat",cursive;font-size:1.5rem;color:var(--ink-soft);line-height:1.35;}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-top:var(--sp-3);}
+.chip{
+  font-size:.78rem;font-weight:600;padding:.4em 1em;border-radius:var(--r-pill);
+  background:var(--cream-deep);color:var(--ink-soft);
+}
+
+/* ==========================================================================
+   8. ГАЛЕРЕЯ  ·  GALLERY
+   ========================================================================== */
+.gallery__grid{columns:2;column-gap:12px;}
+@media (min-width:640px){ .gallery__grid{columns:3;column-gap:14px;} }
+@media (min-width:1000px){ .gallery__grid{columns:4;column-gap:16px;} }
+
+/* Свёрнутое состояние обрезает ОБЁРТКУ, а не саму колоночную сетку:
+   у multi-column с заданной высотой колонки уезжают вбок, а не вниз. */
+.gallery__viewport{position:relative;}
+.gallery.is-collapsed .gallery__viewport{max-height:min(150vh,1300px);overflow:hidden;}
+.gallery__fade{
+  position:absolute;left:0;right:0;bottom:0;height:200px;
+  background:linear-gradient(180deg,transparent,var(--cream) 82%);
+  pointer-events:none;opacity:0;transition:opacity .4s ease;
+}
+.gallery.is-collapsed .gallery__fade{opacity:1;}
+.gallery__more{display:flex;justify-content:center;margin-top:var(--sp-3);}
+
+.shot{
+  break-inside:avoid;margin:0 0 12px;
+  border-radius:var(--r-sm);overflow:hidden;
+  background:var(--cream-deep);
+  box-shadow:var(--shadow-sm);
+  cursor:zoom-in;
+  transition:transform .45s var(--ease),box-shadow .45s var(--ease);
+}
+@media (min-width:640px){ .shot{margin-bottom:14px;} }
+.shot img{width:100%;height:auto;transition:transform .7s var(--ease),filter .5s;}
+.shot:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+.shot:hover img{transform:scale(1.045);}
+
+/* ==========================================================================
+   10. ВИДЕО  ·  VIDEO
+   ========================================================================== */
+.videos{display:grid;gap:clamp(1.2rem,3vw,1.8rem);}
+@media (min-width:760px){ .videos{grid-template-columns:repeat(2,1fr);} }
+.vcard{
+  background:var(--surface);border-radius:var(--r-md);overflow:hidden;
+  border:1px solid var(--line);box-shadow:var(--shadow-sm);
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease);
+}
+.vcard:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);}
+/* Рамка всегда во всю ширину карточки: ролики любой ориентации
+   вписываются внутрь и добираются тёмным фоном, без белых полей. */
+.vcard__media{width:100%;aspect-ratio:4/5;background:#1b1816;}
+.vcard__media video,.vcard__media iframe{width:100%;height:100%;border:0;object-fit:contain;background:#1b1816;}
+.vcard--wide .vcard__media{aspect-ratio:16/9;}
+.vcard__body{padding:1rem 1.2rem 1.2rem;}
+.vcard__body h3{font-size:1.08rem;}
+.vcard__body p{color:var(--ink-faint);font-size:.9rem;margin:.35em 0 0;}
+
+/* ==========================================================================
+   11. ПИСЬМО  ·  LETTER
+   ========================================================================== */
+.letter-section{position:relative;overflow:hidden;}
+.letter-section__bg{
+  position:absolute;inset:-20% -10%;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(38vmax 38vmax at 18% 22%, var(--violet-tint), transparent 62%),
+    radial-gradient(34vmax 34vmax at 82% 76%, var(--peach-tint), transparent 62%);
+  opacity:.75;will-change:transform;
+}
+.letter-section .wrap{position:relative;z-index:1;}
+.letter{
+  width:min(100%,720px);margin-inline:auto;
+  background:var(--surface);border-radius:var(--r-lg);
+  padding:clamp(1.8rem,5vw,3.4rem);
+  box-shadow:var(--shadow-lg);
+  border:1px solid rgba(255,255,255,.7);
+}
+.letter__salute{font-family:"Caveat",cursive;font-size:2rem;color:var(--peach-deep);margin-bottom:.2em;}
+.letter p{color:var(--ink-soft);}
+.letter__teaser{font-size:1.08rem;color:var(--ink)!important;}
+.letter__full{
+  max-height:0;opacity:0;overflow:hidden;
+  transition:max-height .85s var(--ease),opacity .6s ease .1s;
+}
+.letter.is-open .letter__full{opacity:1;}
+.letter__full-inner{padding-top:1.2em;}
+.letter__sign{
+  font-family:"Caveat",cursive;font-size:1.65rem;color:var(--ink);
+  margin-top:1.2em;line-height:1.3;
+}
+.letter__toggle{margin-top:var(--sp-3);}
+.letter.is-open .letter__toggle .icon-chev{transform:rotate(180deg);}
+.icon-chev{transition:transform .5s var(--ease);}
+
+/* ==========================================================================
+   12. ПОДАРКИ  ·  GIFTS
+   ========================================================================== */
+.gifts{display:grid;gap:var(--sp-2);grid-template-columns:repeat(2,1fr);}
+@media (min-width:700px){ .gifts{grid-template-columns:repeat(3,1fr);gap:var(--sp-3);} }
+.gift{
+  position:relative;min-height:150px;
+  border-radius:var(--r-md);border:1px solid var(--line);
+  background:var(--surface);box-shadow:var(--shadow-sm);
+  padding:1.2rem;text-align:center;
+  display:grid;place-items:center;
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease),background .4s;
+}
+.gift:hover{transform:translateY(-4px) rotate(-.6deg);box-shadow:var(--shadow-md);}
+.gift__face,.gift__wish{grid-area:1/1;transition:opacity .45s var(--ease),transform .45s var(--ease);}
+.gift__face{display:grid;gap:.55rem;justify-items:center;}
+.gift__box{font-size:1.9rem;line-height:1;}
+.gift__hint{font-size:.75rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;}
+.gift__wish{opacity:0;transform:scale(.9);font-size:.95rem;color:var(--ink-soft);line-height:1.55;}
+.gift.is-open{background:linear-gradient(150deg,var(--surface),var(--peach-tint));}
+.gift.is-open .gift__face{opacity:0;transform:scale(.85);}
+.gift.is-open .gift__wish{opacity:1;transform:scale(1);}
+
+/* ==========================================================================
+   13. ФУТЕР  ·  FOOTER
+   ========================================================================== */
+.finale{
+  position:relative;text-align:center;
+  padding-block:clamp(4.5rem,12vw,8rem);
+  background:linear-gradient(180deg,var(--cream),var(--cream-deep));
+  border-top:1px solid var(--line);
+  overflow:hidden;
+}
+.finale__heart{font-size:2.6rem;line-height:1;animation:beat 1.9s ease-in-out infinite;display:inline-block;}
+@keyframes beat{0%,100%{transform:scale(1);}14%{transform:scale(1.17);}28%{transform:scale(1);}42%{transform:scale(1.11);}56%{transform:scale(1);}}
+.finale h2{margin:.4em 0 .3em;}
+.finale__text{color:var(--ink-soft);max-width:40ch;margin-inline:auto;}
+.finale__actions{display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;margin-top:var(--sp-4);}
+.finale__meta{margin-top:var(--sp-4);font-size:.8rem;color:var(--ink-faint);}
+.sparkles{position:absolute;inset:0;pointer-events:none;}
+.sparkle{
+  position:absolute;width:5px;height:5px;border-radius:50%;
+  background:var(--violet);opacity:0;
+  animation:twinkle 4.5s ease-in-out infinite;
+}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(.4);}50%{opacity:.6;transform:scale(1);}}
+#confetti{position:fixed;inset:0;z-index:80;pointer-events:none;}
+
+/* ==========================================================================
+   14. ЛАЙТБОКС  ·  LIGHTBOX
+   ========================================================================== */
+.lightbox{
+  position:fixed;inset:0;z-index:100;
+  background:rgba(30,25,22,.93);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  display:grid;grid-template-rows:1fr auto;
+  padding:clamp(.8rem,3vw,2rem);
+  opacity:0;visibility:hidden;
+  transition:opacity .35s ease,visibility .35s;
+}
+.lightbox.is-open{opacity:1;visibility:visible;}
+.lightbox__stage{display:grid;place-items:center;min-height:0;}
+.lightbox__img{
+  max-width:100%;max-height:100%;
+  border-radius:var(--r-sm);
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.7);
+  transform:scale(.96);opacity:0;
+  transition:transform .4s var(--ease),opacity .3s ease;
+}
+.lightbox.is-open .lightbox__img{transform:scale(1);opacity:1;}
+.lightbox__bar{
+  display:flex;align-items:center;justify-content:center;gap:var(--sp-2);
+  padding-top:var(--sp-2);color:#EFE6DE;
+}
+.lightbox__count{font-size:.82rem;letter-spacing:.1em;min-width:5ch;text-align:center;opacity:.75;}
+.lb-btn{
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.1);color:#fff;
+  display:grid;place-items:center;
+  transition:background .25s,transform .25s;
+}
+.lb-btn:hover{background:rgba(255,255,255,.22);transform:scale(1.07);}
+.lightbox__close{position:absolute;top:clamp(.8rem,3vw,1.6rem);right:clamp(.8rem,3vw,1.6rem);}
+
+/* ==========================================================================
+   15. ПОЯВЛЕНИЕ ПРИ СКРОЛЛЕ  ·  SCROLL REVEAL
+   ========================================================================== */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease);}
+.reveal.is-visible{opacity:1;transform:none;}
+.reveal[data-delay="1"]{transition-delay:.09s;}
+.reveal[data-delay="2"]{transition-delay:.18s;}
+.reveal[data-delay="3"]{transition-delay:.27s;}
+.reveal[data-delay="4"]{transition-delay:.36s;}
+
+/* ==========================================================================
+   16. ДОСТУПНОСТЬ: МЕНЬШЕ ДВИЖЕНИЯ  ·  REDUCED MOTION
+   Всё выключается: страница остаётся полностью читаемой и статичной.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{
+    animation-duration:.001ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.001ms!important;
+  }
+  .reveal{opacity:1;transform:none;}
+  .word__in{transform:none;}
+  .petals,.sparkles,#confetti{display:none;}
+  .blob{filter:blur(60px);opacity:.4;}
+}
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
+}
+</style>
+</head>
+
+<body id="top">
+
+<div class="progress" aria-hidden="true"><span class="progress__bar" id="progressBar"></span></div>
+
+<!-- ======================= ШАПКА · HEADER ======================= -->
+<header class="site-header" id="siteHeader">
+  <a class="site-header__mark" href="#top">
+    <span>♡</span>&nbsp;<span class="lbl lbl--ru">Алека</span><span class="lbl lbl--en">Aleka</span>
+  </a>
+
+  <nav class="nav" data-ru-label="Разделы страницы" data-en-label="Page sections">
+    <a href="#about"    data-ru="О тебе"       data-en="About you">О тебе</a>
+    <a href="#gallery"  data-ru="Галерея"      data-en="Gallery">Галерея</a>
+    <a href="#video"    data-ru="Видео"        data-en="Video">Видео</a>
+    <a href="#letter"   data-ru="Письмо"       data-en="Letter">Письмо</a>
+  </nav>
+
+  <div class="lang" role="group" aria-label="Language / Язык">
+    <button class="lang__btn" data-set-lang="ru" aria-pressed="true">RU</button>
+    <button class="lang__btn" data-set-lang="en" aria-pressed="false">EN</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ======================= ГЕРОЙ · HERO ======================= -->
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="hero__bg" aria-hidden="true">
+      <span class="blob blob--1"></span>
+      <span class="blob blob--2"></span>
+      <span class="blob blob--3"></span>
+      <div class="petals" id="petals"></div>
+    </div>
+
+    <div class="hero__inner">
+      <!-- TODO: поставь настоящую дату дня рождения -->
+      <p class="eyebrow" data-ru="15 августа · твой день" data-en="August 15 · your day">15 августа · твой день</p>
+
+      <h1 class="hero__title" id="heroTitle" data-split
+          data-ru="С днём рождения, Алека!"
+          data-en="Happy Birthday, Aleka!">С днём рождения, Алека!</h1>
+
+      <p class="hero__sub"
+         data-ru="Эта страница собрана из тепла, смеха и наших любимых моментов. Пролистай её медленно — здесь всё про тебя."
+         data-en="This page is made of warmth, laughter and our favourite moments. Scroll slowly — all of it is about you."></p>
+
+      <a class="hero__cta" href="#about" data-ru-label="Пролистать вниз" data-en-label="Scroll down">
+        <span class="scroll-cue" aria-hidden="true">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </span>
+        <span data-ru="Листай вниз" data-en="Scroll down"></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ======================= О ТЕБЕ · ABOUT ======================= -->
+  <section class="section" id="about" aria-labelledby="aboutTitle">
+    <div class="wrap about">
+
+      <div class="about__text">
+        <p class="eyebrow reveal" data-ru="О тебе" data-en="About you"></p>
+        <h2 class="reveal" id="aboutTitle" data-delay="1"
+            data-ru="Человек, рядом с которым всё становится проще"
+            data-en="The person who makes everything simpler"></h2>
+
+        <div class="about__body">
+          <!-- TODO: перепиши эти три абзаца своими словами — это самая личная часть страницы -->
+          <p class="reveal" data-delay="1"
+             data-ru="Есть люди, рядом с которыми не нужно стараться быть кем-то другим. Ты — именно такая."
+             data-en="There are people around whom you never have to try to be someone else. You are exactly that."></p>
+
+          <p class="reveal" data-delay="2"
+             data-ru="Ты умеешь замечать мелочи: настроение по одному сообщению, усталость по голосу, радость раньше, чем о ней успеешь рассказать. Это редкий талант, и ты пользуешься им щедро — на всех, кто рядом."
+             data-en="You notice the small things: a mood from a single message, tiredness in a voice, joy before anyone has had time to mention it. That is a rare talent, and you spend it generously on everyone around you."></p>
+
+          <p class="reveal" data-delay="3"
+             data-ru="Спасибо за честность, за смех до слёз и за то, что ты всегда на моей стороне. Пусть этот год вернёт тебе всё то тепло, которое ты раздаёшь другим."
+             data-en="Thank you for your honesty, for laughing until we cry, and for always being on my side. May this year give you back all the warmth you hand out to everyone else."></p>
+        </div>
+      </div>
+
+      <aside class="namecard reveal" data-delay="2">
+        <p class="namecard__label" data-ru="Виновница торжества" data-en="The birthday girl"></p>
+        <p class="namecard__name"><span class="lbl lbl--ru">Алека</span><span class="lbl lbl--en">Aleka</span></p>
+        <!-- TODO: замени на вашу личную подпись/прозвище -->
+        <p class="namecard__note"
+           data-ru="самый тёплый человек в моём списке"
+           data-en="the warmest person on my list"></p>
+        <ul class="chips" style="list-style:none;padding:0;">
+          <li class="chip" data-ru="Тепло"     data-en="Warmth"></li>
+          <li class="chip" data-ru="Честность" data-en="Honesty"></li>
+          <li class="chip" data-ru="Смех"      data-en="Laughter"></li>
+          <li class="chip" data-ru="Поддержка" data-en="Support"></li>
+        </ul>
+      </aside>
+
+    </div>
+  </section>
+
+  <!-- ======================= ГАЛЕРЕЯ · GALLERY ======================= -->
+  <section class="section section--tint" id="gallery" aria-labelledby="galTitle">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="eyebrow reveal" data-ru="Галерея" data-en="Gallery"></p>
+        <h2 class="reveal" id="galTitle" data-delay="1"
+            data-ru="Кадры, которые хочется пересматривать"
+            data-en="Frames worth revisiting"></h2>
+        <p class="section__lead reveal" data-delay="2"
+           data-ru="Нажми на любое фото, чтобы открыть его крупно."
+           data-en="Tap any photo to open it full size."></p>
+      </div>
+
+      <div class="gallery is-collapsed" id="galleryRoot">
+        <div class="gallery__viewport" id="galleryViewport">
+          <!-- Фотографии подставляются из массива PHOTOS в скрипте внизу файла -->
+          <div class="gallery__grid" id="galleryGrid"></div>
+          <span class="gallery__fade" aria-hidden="true"></span>
+        </div>
+
+        <div class="gallery__more">
+          <button class="btn btn--ghost" id="galleryToggle" aria-expanded="false" aria-controls="galleryViewport">
+            <span class="lbl lbl--ru" data-more="Показать все фото" data-less="Свернуть галерею">Показать все фото</span>
+            <span class="lbl lbl--en" data-more="Show all photos"  data-less="Collapse gallery">Show all photos</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================= ВИДЕО · VIDEO ======================= -->
+  <section class="section" id="video" aria-labelledby="vidTitle">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="eyebrow reveal" data-ru="Видео" data-en="Video"></p>
+        <h2 class="reveal" id="vidTitle" data-delay="1"
+            data-ru="Воспоминания в движении"
+            data-en="Memories in motion"></h2>
+      </div>
+
+      <!-- Вариант 1: локальные файлы — подставляются из массива VIDEOS в скрипте -->
+      <div class="videos" id="videoGrid"></div>
+
+      <!--
+        TODO · Вариант 2: вставка с YouTube.
+        Раскомментируй блок ниже и подставь свой ID ролика вместо VIDEO_ID.
+
+      <div class="videos" style="margin-top:1.5rem">
+        <article class="vcard vcard--wide reveal" style="grid-column:1/-1">
+          <div class="vcard__media">
+            <iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID"
+                    title="Поздравление с YouTube"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+          </div>
+          <div class="vcard__body">
+            <h3>Название ролика</h3>
+            <p>Короткое описание.</p>
+          </div>
+        </article>
+      </div>
+      -->
+    </div>
+  </section>
+
+  <!-- ======================= ПИСЬМО · LETTER ======================= -->
+  <section class="section letter-section" id="letter" aria-labelledby="letterTitle">
+    <div class="letter-section__bg" id="letterBg" aria-hidden="true"></div>
+    <div class="wrap">
+      <div class="section__head" style="margin-inline:auto;text-align:center;max-width:40ch">
+        <p class="eyebrow reveal" data-ru="Личное" data-en="Personal"></p>
+        <h2 class="reveal" id="letterTitle" data-delay="1"
+            data-ru="Письмо, которое я давно хотел написать"
+            data-en="A letter I've long wanted to write"></h2>
+      </div>
+
+      <article class="letter reveal" data-delay="2" id="letterCard">
+        <p class="letter__salute"><span class="lbl lbl--ru">Алека, с днём рождения! 🎉</span><span class="lbl lbl--en">Aleka, happy birthday! 🎉</span></p>
+
+        <p class="letter__teaser"
+           data-ru="Желаю тебе не просто здоровья и успеха, а чтобы у тебя был свой идеальный баланс: достаточно сил на учёбу и работу, достаточно наглости, чтобы брать от жизни то, что тебе хочется, и достаточно спокойствия, чтобы не выгорать каждые три месяца. Пусть каждый новый год жизни приносит тебе не только галочки в списке целей, но и истории, от которых самой смешно и тепло."
+           data-en="I don't just wish you health and success — I wish you your own perfect balance: enough energy for studying and work, enough nerve to take from life what you actually want, and enough calm not to burn out every three months. May every new year bring you not only ticked-off goals, but also stories that make you laugh and feel warm inside."></p>
+
+        <div class="letter__full" id="letterFull">
+          <div class="letter__full-inner">
+            <p data-ru="Ты моя самая лучшая и близкая подруга, мы дружим уже, наверное, 5–6 лет. За это время мы успели поучаствовать в робо-соревах, днями готовиться к ним, вместе гулять, дурачиться, и на боулинг впервые в жизни я пошёл именно с вами."
+               data-en="You're my best and closest friend — we've been friends for about five or six years now. In that time we've competed in robotics tournaments, spent whole days getting ready for them, wandered around together, been ridiculous together, and the first time in my life I ever went bowling, it was with you."></p>
+
+            <p data-ru="Огромное спасибо тебе за всю поддержку и доверие, которые ты всегда давала мне. Я очень ценю нашу дружбу и реально дорожу ей. Ты умеешь поддержать без осуждения, без лишних нотаций: просто спокойно, по-доброму, по делу."
+               data-en="Thank you so much for all the support and trust you have always given me. I really value our friendship and genuinely treasure it. You know how to be there for someone without judging, without unnecessary lectures — just calmly, kindly, and to the point."></p>
+
+            <p data-ru="Вот уже второй год ты встречаешь день рождения вдали от дома, и второй год подряд я хотел позвать тебя на свой др, но ты опять улетела 😅 Где бы ты ни была, всегда знай: у тебя есть любящая семья, друзья и близкие, и я желаю, чтобы в любом уголке планеты ты находила людей, которые ощущаются как дом, даже если он далеко."
+               data-en="This is the second year in a row that you're celebrating your birthday far from home, and the second year in a row I wanted to invite you to mine — and you flew off again 😅 Wherever you are, always know this: you have a loving family, friends and people who are close to you. And I hope that in every corner of the planet you find people who feel like home, even when home is far away."></p>
+
+            <p data-ru="Ты часто пишешь, что я трудолюбивый и умный, но это на 100% про тебя. В универе, мне кажется, никто из нас не учится так усердно, как ты, и никто из нас не улетал в другую страну, чтобы заработать. Ты сильная, умная и очень трудолюбивая девушка, и это видно даже без слов."
+               data-en="You often tell me that I'm hard-working and smart, but that is 100% about you. At university I don't think any of us studies as hard as you do, and none of us has flown to another country to earn a living. You are a strong, smart and incredibly hard-working person, and it shows without you saying a word."></p>
+
+            <p data-ru="Я верю, что все твои труды принесут свои плоды: что за каждую бессонную ночь, за каждый сложный сем, за каждую смену в другой стране тебе прилетит что-то большое и хорошее. Пусть у тебя будет работа, которая не высасывает душу; люди, рядом с которыми спокойно; и города, куда ты будешь улетать не только «чтоб выжить», но и просто для наслаждения."
+               data-en="I believe all your work will pay off — that for every sleepless night, every difficult semester, every shift in another country, something big and good is coming your way. May you have work that doesn't drain your soul, people you feel at peace around, and cities you fly to not just to survive, but simply to enjoy."></p>
+
+            <p data-ru="И знай: я всегда буду рад помочь тебе с чем угодно и когда угодно. Просто скажи."
+               data-en="And know this: I will always be glad to help you with anything, at any time. Just say the word."></p>
+
+            <p class="letter__sign"
+               data-ru="С днём рождения, хомячочек!!! 🤍"
+               data-en="Happy birthday, my little hamster!!! 🤍"></p>
+          </div>
+        </div>
+
+        <button class="btn btn--primary letter__toggle" id="letterToggle" aria-expanded="false" aria-controls="letterFull">
+          <span class="lbl lbl--ru" data-more="Прочитать письмо" data-less="Свернуть письмо">Прочитать письмо</span>
+          <span class="lbl lbl--en" data-more="Read the letter"  data-less="Collapse the letter">Read the letter</span>
+          <svg class="icon-chev" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </article>
+    </div>
+  </section>
+
+  <!-- ======================= ПОДАРКИ · GIFTS ======================= -->
+  <section class="section" id="gifts" aria-labelledby="giftTitle">
+    <div class="wrap">
+      <div class="section__head">
+        <p class="eyebrow reveal" data-ru="Маленькие подарки" data-en="Small gifts"></p>
+        <h2 class="reveal" id="giftTitle" data-delay="1"
+            data-ru="Шесть коробок — шесть пожеланий"
+            data-en="Six boxes — six wishes"></h2>
+        <p class="section__lead reveal" data-delay="2"
+           data-ru="Открой каждую: внутри спрятано пожелание."
+           data-en="Open each one: there's a wish hidden inside."></p>
+      </div>
+
+      <!-- TODO: замени пожелания на свои -->
+      <div class="gifts">
+        <button class="gift reveal" data-ru-label="Открыть подарок 1" data-en-label="Open gift 1">
+          <span class="gift__face"><span class="gift__box" aria-hidden="true">🎁</span><span class="gift__hint" data-ru="Открыть" data-en="Open"></span></span>
+          <span class="gift__wish" data-ru="Пусть сбудется то, о чём ты пока боишься говорить вслух." data-en="May the thing you're still afraid to say out loud come true."></span>
+        </button>
+
+        <button class="gift reveal" data-delay="1" data-ru-label="Открыть подарок 2" data-en-label="Open gift 2">
+          <span class="gift__face"><span class="gift__box" aria-hidden="true">🕊️</span><span class="gift__hint" data-ru="Открыть" data-en="Open"></span></span>
+          <span class="gift__wish" data-ru="Спокойных утр и вечеров без тревоги — весь год." data-en="Calm mornings and evenings without anxiety — all year long."></span>
+        </button>
+
+        <button class="gift reveal" data-delay="2" data-ru-label="Открыть подарок 3" data-en-label="Open gift 3">
+          <span class="gift__face"><span class="gift__box" aria-hidden="true">🤍</span><span class="gift__hint" data-ru="Открыть" data-en="Open"></span></span>
+          <span class="gift__wish" data-ru="Пусть рядом остаются только те, кто выбирает тебя каждый день." data-en="May only those who choose you every day stay close."></span>
+        </button>
+
+        <button class="gift reveal" data-ru-label="Открыть подарок 4" data-en-label="Open gift 4">
+          <span class="gift__face"><span class="gift__box" aria-hidden="true">✨</span><span class="gift__hint" data-ru="Открыть" data-en="Open"></span></span>
+          <span class="gift__wish" data-ru="Много поводов смеяться так, чтобы болели щёки." data-en="Plenty of reasons to laugh until your cheeks hurt."></span>
+        </button>
+
+        <button class="gift reveal" data-delay="1" data-ru-label="Открыть подарок 5" data-en-label="Open gift 5">
+          <span class="gift__face"><span class="gift__box" aria-hidden="true">🌊</span><span class="gift__hint" data-ru="Открыть" data-en="Open"></span></span>
+          <span class="gift__wish" data-ru="Дороги, море и билеты в одну сторону — в самом хорошем смысле." data-en="Roads, the sea and one-way tickets — in the best possible sense."></span>
+        </button>
+
+        <button class="gift reveal" data-delay="2" data-ru-label="Открыть подарок 6" data-en-label="Open gift 6">
+          <span class="gift__face"><span class="gift__box" aria-hidden="true">☎️</span><span class="gift__hint" data-ru="Открыть" data-en="Open"></span></span>
+          <span class="gift__wish" data-ru="И чтобы ты всегда знала: тебе есть кому позвонить в любое время." data-en="And may you always know: there's someone you can call at any hour."></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ======================= ФУТЕР · FOOTER ======================= -->
+<footer class="finale" id="finale">
+  <div class="sparkles" id="sparkles" aria-hidden="true"></div>
+  <div class="wrap">
+    <span class="finale__heart" aria-hidden="true">🤍</span>
+    <h2 data-ru="Спасибо, что ты есть" data-en="Thank you for being you"></h2>
+    <p class="finale__text"
+       data-ru="Пусть этот год будет к тебе таким же добрым, как ты — ко всем остальным."
+       data-en="May this year be as kind to you as you are to everyone else."></p>
+
+    <div class="finale__actions">
+      <button class="btn btn--primary" id="confettiBtn">
+        <span data-ru="Ещё конфетти" data-en="More confetti"></span>
+      </button>
+    </div>
+
+    <p class="finale__meta" data-ru="Сделано вручную и с любовью · 2026" data-en="Made by hand, with love · 2026"></p>
+  </div>
+</footer>
+
+<!-- ======================= ЛАЙТБОКС · LIGHTBOX ======================= -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр фото / Photo viewer">
+  <button class="lb-btn lightbox__close" id="lbClose" data-ru-label="Закрыть" data-en-label="Close">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+  <div class="lightbox__stage">
+    <img class="lightbox__img" id="lbImg" src="" alt="">
+  </div>
+  <div class="lightbox__bar">
+    <button class="lb-btn" id="lbPrev" data-ru-label="Предыдущее фото" data-en-label="Previous photo">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <span class="lightbox__count" id="lbCount">1 / 1</span>
+    <button class="lb-btn" id="lbNext" data-ru-label="Следующее фото" data-en-label="Next photo">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+</div>
+
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<script>
+/* ==========================================================================
+   КОНФИГУРАЦИЯ  ·  CONFIG
+   Меняешь список фото и видео здесь — больше нигде трогать не нужно.
+   ========================================================================== */
+
+/* TODO: замени alt-подписи на настоящие описания кадров —
+   это единственное, что нужно для полноценной доступности.
+
+   w и h — реальные размеры файла. Они НУЖНЫ: браузер заранее резервирует
+   место под каждое фото, поэтому сетка не «прыгает», пока грузятся картинки.
+   Добавляешь своё фото — впиши его настоящие ширину и высоту. */
+var PHOTOS = [
+  { src: "pics/photo_1_2026-08-14_23-17-26.jpg",  w:1180, h:2560, ru: "Наше фото 1",  en: "Our photo 1"  },
+  { src: "pics/photo_2_2026-08-14_23-17-26.jpg",  w: 960, h:1280, ru: "Наше фото 2",  en: "Our photo 2"  },
+  { src: "pics/photo_3_2026-08-14_23-17-26.jpg",  w: 960, h:1280, ru: "Наше фото 3",  en: "Our photo 3"  },
+  { src: "pics/photo_4_2026-08-14_23-17-26.jpg",  w:2560, h:1920, ru: "Наше фото 4",  en: "Our photo 4"  },
+  { src: "pics/photo_5_2026-08-14_23-17-26.jpg",  w:1280, h: 793, ru: "Наше фото 5",  en: "Our photo 5"  },
+  { src: "pics/photo_6_2026-08-14_23-17-26.jpg",  w: 576, h:1280, ru: "Наше фото 6",  en: "Our photo 6"  },
+  { src: "pics/photo_7_2026-08-14_23-17-26.jpg",  w:1280, h: 591, ru: "Наше фото 7",  en: "Our photo 7"  },
+  { src: "pics/photo_8_2026-08-14_23-17-26.jpg",  w: 525, h: 935, ru: "Наше фото 8",  en: "Our photo 8"  },
+  { src: "pics/photo_9_2026-08-14_23-17-26.jpg",  w: 960, h:1280, ru: "Наше фото 9",  en: "Our photo 9"  },
+  { src: "pics/photo_10_2026-08-14_23-17-27.jpg", w: 960, h:1280, ru: "Наше фото 10", en: "Our photo 10" },
+  { src: "pics/photo_11_2026-08-14_23-17-27.jpg", w:1280, h: 720, ru: "Наше фото 11", en: "Our photo 11" },
+  { src: "pics/photo_12_2026-08-14_23-17-27.jpg", w:1057, h:1280, ru: "Наше фото 12", en: "Our photo 12" },
+  { src: "pics/photo_13_2026-08-14_23-17-27.jpg", w: 720, h:1280, ru: "Наше фото 13", en: "Our photo 13" },
+  { src: "pics/photo_14_2026-08-14_23-17-27.jpg", w: 720, h:1280, ru: "Наше фото 14", en: "Our photo 14" },
+  { src: "pics/photo_15_2026-08-14_23-17-27.jpg", w:1280, h: 960, ru: "Наше фото 15", en: "Our photo 15" },
+  { src: "pics/photo_16_2026-08-14_23-17-27.jpg", w: 720, h:1280, ru: "Наше фото 16", en: "Our photo 16" },
+  { src: "pics/photo_17_2026-08-14_23-17-27.jpg", w: 640, h: 640, ru: "Наше фото 17", en: "Our photo 17" },
+  { src: "pics/photo_18_2026-08-14_23-17-27.jpg", w: 720, h: 619, ru: "Наше фото 18", en: "Our photo 18" },
+  { src: "pics/photo_19_2026-08-14_23-17-27.jpg", w:1080, h:1074, ru: "Наше фото 19", en: "Our photo 19" },
+  { src: "pics/photo_20_2026-08-14_23-17-27.jpg", w:1280, h: 905, ru: "Наше фото 20", en: "Our photo 20" },
+  { src: "pics/photo_21_2026-08-14_23-17-27.jpg", w:1013, h:1280, ru: "Наше фото 21", en: "Our photo 21" },
+  { src: "pics/photo_22_2026-08-14_23-17-27.jpg", w: 952, h:1280, ru: "Наше фото 22", en: "Our photo 22" },
+  { src: "pics/photo_23_2026-08-14_23-17-27.jpg", w: 591, h:1280, ru: "Наше фото 23", en: "Our photo 23" },
+  { src: "pics/photo_24_2026-08-14_23-17-27.jpg", w: 720, h:1280, ru: "Наше фото 24", en: "Our photo 24" },
+  { src: "pics/photo_25_2026-08-14_23-17-27.jpg", w:1280, h: 960, ru: "Наше фото 25", en: "Our photo 25" },
+  { src: "pics/photo_26_2026-08-14_23-17-27.jpg", w: 942, h:1280, ru: "Наше фото 26", en: "Our photo 26" },
+  { src: "pics/photo_27_2026-08-14_23-17-27.jpg", w: 960, h:1280, ru: "Наше фото 27", en: "Our photo 27" },
+  { src: "pics/photo_28_2026-08-14_23-17-27.jpg", w:1280, h: 720, ru: "Наше фото 28", en: "Our photo 28" },
+  { src: "pics/photo_29_2026-08-14_23-17-27.jpg", w: 960, h:1280, ru: "Наше фото 29", en: "Our photo 29" },
+  { src: "pics/photo_30_2026-08-14_23-17-27.jpg", w:1280, h: 960, ru: "Наше фото 30", en: "Our photo 30" },
+  { src: "pics/photo_31_2026-08-14_23-17-27.jpg", w:1280, h: 720, ru: "Наше фото 31", en: "Our photo 31" },
+  { src: "pics/photo_32_2026-08-14_23-17-27.jpg", w: 720, h:1280, ru: "Наше фото 32", en: "Our photo 32" },
+  { src: "pics/photo_33_2026-08-14_23-17-27.jpg", w: 960, h:1280, ru: "Наше фото 33", en: "Our photo 33" },
+  { src: "pics/photo_34_2026-08-14_23-17-27.jpg", w:1920, h:2560, ru: "Наше фото 34", en: "Our photo 34" },
+  { src: "pics/photo_35_2026-08-14_23-17-27.jpg", w:1920, h:2560, ru: "Наше фото 35", en: "Our photo 35" },
+  { src: "pics/photo_36_2026-08-14_23-17-27.jpg", w: 959, h:1280, ru: "Наше фото 36", en: "Our photo 36" },
+  { src: "pics/photo_37_2026-08-14_23-17-27.jpg", w: 591, h:1280, ru: "Наше фото 37", en: "Our photo 37" }
+];
+
+/* TODO: подпиши видео. poster — необязательное превью (путь к фото). */
+var VIDEOS = [
+  { src: "pics/video_2026-08-14_23-17-26.mp4",     ru: "Видео 1", en: "Video 1", ruNote: "Короткое описание", enNote: "Short caption", poster: "" },
+  { src: "pics/video_2026-08-14_23-17-26 (2).mp4", ru: "Видео 2", en: "Video 2", ruNote: "Короткое описание", enNote: "Short caption", poster: "" },
+  { src: "pics/video_2026-08-14_23-17-26 (3).mp4", ru: "Видео 3", en: "Video 3", ruNote: "Короткое описание", enNote: "Short caption", poster: "" },
+  { src: "pics/video_2026-08-14_23-17-26 (4).mp4", ru: "Видео 4", en: "Video 4", ruNote: "Короткое описание", enNote: "Short caption", poster: "" },
+  { src: "pics/video_2026-08-14_23-17-26 (5).mp4", ru: "Видео 5", en: "Video 5", ruNote: "Короткое описание", enNote: "Short caption", poster: "" },
+  { src: "pics/video_2026-08-14_23-17-26 (7).mp4", ru: "Видео 6", en: "Video 6", ruNote: "Короткое описание", enNote: "Short caption", poster: "" }
+];
+
+var TITLES = { ru: "С днём рождения, Алека", en: "Happy Birthday, Aleka" };
+
+(function () {
+  "use strict";
+
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var $  = function (s, c) { return (c || document).querySelector(s); };
+  var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+
+  /* ------------------------------------------------------------------
+     1. ГАЛЕРЕЯ И ВИДЕО: рендер из конфига
+     ------------------------------------------------------------------ */
+  var grid = $("#galleryGrid");
+  PHOTOS.forEach(function (p, i) {
+    var fig = document.createElement("figure");
+    fig.className = "shot";
+    fig.setAttribute("data-index", i);
+
+    var img = document.createElement("img");
+    img.src = encodeURI(p.src);
+    img.loading = "lazy";
+    img.decoding = "async";
+    if (p.w && p.h) { img.width = p.w; img.height = p.h; }  /* резервируем место заранее */
+    img.setAttribute("data-ru-alt", p.ru);
+    img.setAttribute("data-en-alt", p.en);
+    img.alt = p.ru;
+
+    fig.appendChild(img);
+    grid.appendChild(fig);
+  });
+
+  var vgrid = $("#videoGrid");
+  VIDEOS.forEach(function (v, i) {
+    var art = document.createElement("article");
+    art.className = "vcard reveal";
+    if (i % 3) { art.setAttribute("data-delay", String(i % 3)); }
+
+    var media = document.createElement("div");
+    media.className = "vcard__media";
+
+    var vid = document.createElement("video");
+    vid.src = encodeURI(v.src);
+    vid.controls = true;
+    vid.preload = "metadata";
+    vid.playsInline = true;
+    if (v.poster) { vid.poster = encodeURI(v.poster); }
+    media.appendChild(vid);
+
+    var body = document.createElement("div");
+    body.className = "vcard__body";
+    var h = document.createElement("h3");
+    h.setAttribute("data-ru", v.ru); h.setAttribute("data-en", v.en);
+    var note = document.createElement("p");
+    note.setAttribute("data-ru", v.ruNote); note.setAttribute("data-en", v.enNote);
+    body.appendChild(h); body.appendChild(note);
+
+    art.appendChild(media); art.appendChild(body);
+    vgrid.appendChild(art);
+  });
+
+  /* Пауза остальным роликам, когда запускается один */
+  vgrid.addEventListener("play", function (e) {
+    $$("video", vgrid).forEach(function (other) {
+      if (other !== e.target) { other.pause(); }
+    });
+  }, true);
+
+  /* ------------------------------------------------------------------
+     2. ДВА ЯЗЫКА: data-ru / data-en → текст, alt, aria-label
+     ------------------------------------------------------------------ */
+  function splitWords(el) {
+    var text = (el.getAttribute("data-" + currentLang) || el.textContent).trim();
+    el.textContent = "";
+    text.split(" ").forEach(function (w, i) {
+      var outer = document.createElement("span"); outer.className = "word";
+      var inner = document.createElement("span"); inner.className = "word__in";
+      inner.textContent = w;
+      inner.style.animationDelay = (0.09 * i + 0.12) + "s";
+      outer.appendChild(inner);
+      el.appendChild(outer);
+      el.appendChild(document.createTextNode(" "));
+    });
+  }
+
+  var currentLang = "ru";
+
+  function applyLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.documentElement.setAttribute("data-lang", lang);
+    document.title = TITLES[lang];
+
+    $$("[data-" + lang + "]").forEach(function (el) {
+      if (el.hasAttribute("data-split")) { return; }
+      el.textContent = el.getAttribute("data-" + lang);
+    });
+    $$("[data-" + lang + "-alt]").forEach(function (el) {
+      el.setAttribute("alt", el.getAttribute("data-" + lang + "-alt"));
+    });
+    $$("[data-" + lang + "-label]").forEach(function (el) {
+      el.setAttribute("aria-label", el.getAttribute("data-" + lang + "-label"));
+    });
+
+    $$("[data-split]").forEach(function (el) {
+      if (reduced) { el.textContent = el.getAttribute("data-" + lang); }
+      else { splitWords(el); }
+    });
+
+    $$("[data-set-lang]").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-set-lang") === lang));
+    });
+
+    syncToggleLabels();
+    try { localStorage.setItem("aleka-lang", lang); } catch (e) {}
+  }
+
+  $$("[data-set-lang]").forEach(function (btn) {
+    btn.addEventListener("click", function () { applyLang(btn.getAttribute("data-set-lang")); });
+  });
+
+  var saved = "ru";
+  try { saved = localStorage.getItem("aleka-lang") || "ru"; } catch (e) {}
+  applyLang(saved === "en" ? "en" : "ru");
+
+  /* Подписи кнопок «показать/свернуть» на обоих языках.
+     Ищем элементы в момент вызова — функция безопасна на любом этапе загрузки. */
+  function setLbl(btn, isOpen) {
+    if (!btn) { return; }
+    $$(".lbl", btn).forEach(function (s) {
+      s.textContent = s.getAttribute(isOpen ? "data-less" : "data-more");
+    });
+  }
+  function syncToggleLabels() {
+    var g = $("#galleryRoot"), lc = $("#letterCard");
+    if (g) { setLbl($("#galleryToggle"), !g.classList.contains("is-collapsed")); }
+    if (lc) { setLbl($("#letterToggle"), lc.classList.contains("is-open")); }
+  }
+
+  /* ------------------------------------------------------------------
+     3. ПОЯВЛЕНИЕ ПРИ СКРОЛЛЕ
+     ------------------------------------------------------------------ */
+  var revealables = $$(".reveal");
+  if (reduced || !("IntersectionObserver" in window)) {
+    revealables.forEach(function (el) { el.classList.add("is-visible"); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -12% 0px", threshold: 0.08 });
+    revealables.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ------------------------------------------------------------------
+     4. ЛЕПЕСТКИ В ГЕРОЕ + ИСКРЫ В ФУТЕРЕ
+     ------------------------------------------------------------------ */
+  if (!reduced) {
+    var petals = $("#petals");
+    for (var i = 0; i < 14; i++) {
+      var s = document.createElement("span");
+      var size = 7 + Math.random() * 12;
+      s.className = "petal";
+      s.style.left = (Math.random() * 100) + "%";
+      s.style.width = size + "px";
+      s.style.height = size + "px";
+      s.style.animationDuration = (13 + Math.random() * 14) + "s";
+      s.style.animationDelay = (-Math.random() * 20) + "s";
+      s.style.setProperty("--drift", (Math.random() * 160 - 80) + "px");
+      if (i % 3 === 0) { s.style.background = "var(--violet-tint)"; }
+      petals.appendChild(s);
+    }
+
+    var sparkles = $("#sparkles");
+    for (var j = 0; j < 18; j++) {
+      var sp = document.createElement("span");
+      sp.className = "sparkle";
+      sp.style.left = (Math.random() * 100) + "%";
+      sp.style.top = (Math.random() * 100) + "%";
+      sp.style.animationDelay = (Math.random() * 4.5) + "s";
+      if (j % 2) { sp.style.background = "var(--peach)"; }
+      sparkles.appendChild(sp);
+    }
+  }
+
+  /* ------------------------------------------------------------------
+     5. ГАЛЕРЕЯ: «показать все»
+     ------------------------------------------------------------------ */
+  var galleryRoot = $("#galleryRoot");
+  var galleryToggle = $("#galleryToggle");
+  galleryToggle.addEventListener("click", function () {
+    var open = galleryRoot.classList.toggle("is-collapsed") === false;
+    galleryToggle.setAttribute("aria-expanded", String(open));
+    syncToggleLabels();
+    if (!open) { $("#gallery").scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" }); }
+  });
+
+  /* ------------------------------------------------------------------
+     6. ЛАЙТБОКС
+     ------------------------------------------------------------------ */
+  var lb = $("#lightbox"), lbImg = $("#lbImg"), lbCount = $("#lbCount");
+  var lbIndex = 0, lastFocus = null;
+
+  function show(n) {
+    lbIndex = (n + PHOTOS.length) % PHOTOS.length;
+    var p = PHOTOS[lbIndex];
+    lbImg.src = encodeURI(p.src);
+    lbImg.alt = p[currentLang] || p.ru;
+    lbCount.textContent = (lbIndex + 1) + " / " + PHOTOS.length;
+  }
+  function openLb(n) {
+    lastFocus = document.activeElement;
+    show(n);
+    lb.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+    $("#lbClose").focus();
+  }
+  function closeLb() {
+    lb.classList.remove("is-open");
+    document.body.style.overflow = "";
+    if (lastFocus) { lastFocus.focus(); }
+  }
+
+  grid.addEventListener("click", function (e) {
+    var fig = e.target.closest(".shot");
+    if (fig) { openLb(Number(fig.getAttribute("data-index"))); }
+  });
+  $("#lbClose").addEventListener("click", closeLb);
+  $("#lbPrev").addEventListener("click", function () { show(lbIndex - 1); });
+  $("#lbNext").addEventListener("click", function () { show(lbIndex + 1); });
+  lb.addEventListener("click", function (e) {
+    if (e.target === lb || e.target.classList.contains("lightbox__stage")) { closeLb(); }
+  });
+  document.addEventListener("keydown", function (e) {
+    if (!lb.classList.contains("is-open")) { return; }
+    if (e.key === "Escape") { closeLb(); }
+    if (e.key === "ArrowLeft") { show(lbIndex - 1); }
+    if (e.key === "ArrowRight") { show(lbIndex + 1); }
+  });
+  /* свайп на телефоне */
+  var touchX = null;
+  lb.addEventListener("touchstart", function (e) { touchX = e.changedTouches[0].clientX; }, { passive: true });
+  lb.addEventListener("touchend", function (e) {
+    if (touchX === null) { return; }
+    var dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 55) { show(lbIndex + (dx < 0 ? 1 : -1)); }
+    touchX = null;
+  }, { passive: true });
+
+  /* ------------------------------------------------------------------
+     7. ПИСЬМО: разворачивание
+     ------------------------------------------------------------------ */
+  var letterCard = $("#letterCard"), letterFull = $("#letterFull"), letterToggle = $("#letterToggle");
+  letterToggle.addEventListener("click", function () {
+    var open = letterCard.classList.toggle("is-open");
+    letterToggle.setAttribute("aria-expanded", String(open));
+    if (open) {
+      letterFull.style.maxHeight = letterFull.scrollHeight + "px";
+      /* Снимаем ограничение только после анимации именно max-height:
+         событие opacity прилетает раньше и обрезало бы письмо на полпути. */
+      letterFull.addEventListener("transitionend", function once(e) {
+        if (e.target !== letterFull || e.propertyName !== "max-height") { return; }
+        letterFull.style.maxHeight = "none";
+        letterFull.removeEventListener("transitionend", once);
+      });
+    } else {
+      letterFull.style.maxHeight = letterFull.scrollHeight + "px";
+      requestAnimationFrame(function () { letterFull.style.maxHeight = "0px"; });
+    }
+    syncToggleLabels();
+  });
+
+  /* ------------------------------------------------------------------
+     8. ПОДАРКИ
+     ------------------------------------------------------------------ */
+  $$(".gift").forEach(function (g) {
+    g.setAttribute("aria-expanded", "false");
+    g.addEventListener("click", function () {
+      g.setAttribute("aria-expanded", String(g.classList.toggle("is-open")));
+    });
+  });
+
+  /* ------------------------------------------------------------------
+     9. СКРОЛЛ: прогресс-бар, «прилипшая» шапка, лёгкий параллакс
+     ------------------------------------------------------------------ */
+  var bar = $("#progressBar"), header = $("#siteHeader"), letterBg = $("#letterBg");
+  var ticking = false;
+
+  function onScroll() {
+    var y = window.scrollY;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (max > 0 ? (y / max) * 100 : 0) + "%";
+    header.classList.toggle("is-stuck", y > 8);
+
+    if (!reduced && letterBg) {
+      var rect = letterBg.parentElement.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        letterBg.style.transform = "translate3d(0," + (rect.top * -0.08).toFixed(1) + "px,0)";
+      }
+    }
+    ticking = false;
+  }
+  window.addEventListener("scroll", function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
+  onScroll();
+
+  /* ------------------------------------------------------------------
+     10. КОНФЕТТИ
+     ------------------------------------------------------------------ */
+  var cvs = $("#confetti"), ctx = cvs.getContext("2d"), bits = [], raf = null;
+  var COLORS = ["#DE8B72", "#8375AC", "#F8DED3", "#E2DBF0", "#EBCBA6"];
+
+  function sizeCanvas() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cvs.width = window.innerWidth * dpr;
+    cvs.height = window.innerHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  window.addEventListener("resize", sizeCanvas);
+  sizeCanvas();
+
+  function burst(count) {
+    if (reduced) { return; }
+    for (var k = 0; k < count; k++) {
+      bits.push({
+        x: Math.random() * window.innerWidth,
+        y: -20 - Math.random() * window.innerHeight * 0.3,
+        w: 5 + Math.random() * 6,
+        h: 8 + Math.random() * 8,
+        vy: 2 + Math.random() * 3.4,
+        vx: -1.2 + Math.random() * 2.4,
+        rot: Math.random() * Math.PI,
+        vr: -0.09 + Math.random() * 0.18,
+        c: COLORS[(Math.random() * COLORS.length) | 0]
+      });
+    }
+    if (!raf) { raf = requestAnimationFrame(tick); }
+  }
+
+  function tick() {
+    ctx.clearRect(0, 0, cvs.width, cvs.height);
+    bits = bits.filter(function (b) { return b.y < window.innerHeight + 40; });
+    bits.forEach(function (b) {
+      b.x += b.vx; b.y += b.vy; b.rot += b.vr;
+      ctx.save();
+      ctx.translate(b.x, b.y);
+      ctx.rotate(b.rot);
+      ctx.fillStyle = b.c;
+      ctx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h);
+      ctx.restore();
+    });
+    raf = bits.length ? requestAnimationFrame(tick) : (ctx.clearRect(0, 0, cvs.width, cvs.height), null);
+  }
+
+  $("#confettiBtn").addEventListener("click", function () { burst(90); });
+
+  /* Один залп, когда футер впервые попадает в кадр */
+  if (!reduced && "IntersectionObserver" in window) {
+    var fio = new IntersectionObserver(function (en) {
+      if (en[0].isIntersecting) { burst(70); fio.disconnect(); }
+    }, { threshold: 0.35 });
+    fio.observe($("#finale"));
+  }
+
+})();
+</script>
+</body>
+</html>
